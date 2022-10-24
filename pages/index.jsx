@@ -1,5 +1,6 @@
 // import styles from "../styles/Home.module.css";
 import { useEffect, useState } from "react";
+import GCalendar from "../components/GCalendar";
 import Header from "../components/Header";
 import ProfileBar from "../components/ProfileBar";
 import Schedule from "../components/Schedule";
@@ -28,7 +29,8 @@ export default function Home() {
     <div>
       <Header></Header>
       <ProfileBar></ProfileBar>
-      <Schedule props={data} week={1}></Schedule>
+      {/* <Schedule props={data} week={1}></Schedule> */}
+      <GCalendar></GCalendar>
     </div>
   );
 }
