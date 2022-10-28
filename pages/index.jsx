@@ -29,7 +29,7 @@ export default function Home() {
     <div>
       <Header></Header>
       <ProfileBar></ProfileBar>
-      <Schedule props={data} week={1}></Schedule>
+      <Schedule props={data}></Schedule>
     </div>
   );
 }
