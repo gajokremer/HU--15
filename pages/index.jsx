@@ -29,8 +29,7 @@ export default function Home() {
     <div>
       <Header></Header>
       <ProfileBar></ProfileBar>
-      {/* <Schedule props={data} week={1}></Schedule> */}
-      <GCalendar></GCalendar>
+      <Schedule props={data} week={1}></Schedule>
     </div>
   );
 }

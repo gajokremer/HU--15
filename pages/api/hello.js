@@ -1,8 +1,9 @@
 import { render } from "react-dom";
-import renderMatrix from "../../models/Matrix";
+import constructMatrix from "../../models/MatrixConstructor";
+import db from "../../repository/connection-api/database-pool";
 
 export default function handler(req, res) {
-  const matrix = renderMatrix(16, 6);
-  console.log(matrix);
+  const matrix = constructMatrix(16, 6);
+  console.log("Matrix: ", matrix);
   return res.json(matrix);
 }

@@ -13,7 +13,18 @@ body {
   background-color: var(--dark-main);
   display: grid;
   justify-content: center;
-  color: white
+  color: white;
+}
+
+table {
+  border-collapse: collapse;
+  border-radius: 1rem;
+  border: 2px solid white;
+}
+
+td {
+  height: 2rem;
+  width: 10rem;
 }
 
 :root {

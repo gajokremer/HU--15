@@ -1,26 +1,14 @@
 import Link from "next/link";
+import React from "react";
 import Styles from "../styles/Schedule.module.css";
 
-// export default function Table(props) {
-//   console.log(props);
-//   return (
-//     <div>
-//       <table className={Styles.schedule}>
-//         {props.data.map((e) => (
-//           <tr>
-//             {e.map((i) => (
-//               <td>{i}</td>
-//             ))}
-//           </tr>
-//         ))}
-//       </table>
-//     </div>
-//   );
-// }
+// Utilizar cada evento como un objeto JSON, el cual contiene toda la información
+// del evento, y luego utilizar un map para ubicarlos en una matriz.
+// Finalmente, se pasa la matriz al front-end y se renderiza en la tabla.
 
-import React from "react";
+const Schedule = ({ props: data, week }) => {
+  console.log("Data (Schedule): ", data);
 
-const Schedule = ({ props, week }) => {
   const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const hours = [
     "7",
@@ -51,7 +39,7 @@ const Schedule = ({ props, week }) => {
         week++;
       }
     }
-    console.log(week);
+    console.log("New week: ", week);
   };
 
   const prevWeek = () => {
@@ -62,19 +50,27 @@ const Schedule = ({ props, week }) => {
         week--;
       }
     }
-    console.log(week);
+    console.log("New week: ", week);
+  };
+
+  const today = new Date();
+
+  const getWeekOfMonth = (date) => {
+    const firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+    return Math.ceil((date.getDate() + firstDayOfMonth.getDay()) / 7);
   };
 
   return (
     <>
       <div className={Styles.schedule_section}>
-        <div className={Styles.month}>January</div>
+        {/* <div className={Styles.month}>January</div> */}
+        <span className={Styles.month}>{today.toDateString()}</span>
         <div className={Styles.day_section}>
           <div className={Styles.day_picker}>
             <span className={Styles.day_change} id={Styles.prev_day}>
               <pre onClick={() => prevWeek()}>&lt;</pre>
             </span>
-            <span className={Styles.week}>Week {week}</span>
+            <span className={Styles.week}>Week {getWeekOfMonth(today)}</span>
             <span className={Styles.day_change} id={Styles.next_day}>
               <pre onClick={() => nextWeek()}>&gt;</pre>
             </span>
@@ -82,6 +78,7 @@ const Schedule = ({ props, week }) => {
         </div>
       </div>
 
+      {/* <p>{data}</p> */}
       <div>
         <table className={Styles.schedule}>
           <thead>
@@ -92,7 +89,7 @@ const Schedule = ({ props, week }) => {
                 </td>
               ))}
             </tr>
-            {props.map((rows) => (
+            {data.map((rows) => (
               <tr key={""}>
                 <td className={Styles.first_col}>{hours[counter++] + ":00"}</td>
                 {rows.map((cols) => (
