@@ -76,16 +76,16 @@ const Schedule = ({ props: data, today }) => {
   let hoursCounter = 0;
 
   let firstDayIndex = weekStart.getDate() - 1;
-  let lastDayIndex = weekEnd.getDate();
+  // let lastDayIndex = weekEnd.getDate();
 
   const daysThisMonth = daysInMonth(
     weekStart.getMonth() + 1,
     weekStart.getFullYear()
   );
 
-  console.log("firstDayIndex: ", firstDayIndex);
-  console.log("lastDayIndex: ", lastDayIndex);
-  console.log("daysThisMonth: ", daysThisMonth);
+  // console.log("firstDayIndex: ", firstDayIndex);
+  // console.log("lastDayIndex: ", lastDayIndex);
+  // console.log("daysThisMonth: ", daysThisMonth);
 
   function changeDayIndex() {
     if (firstDayIndex <= daysThisMonth) {
@@ -96,6 +96,13 @@ const Schedule = ({ props: data, today }) => {
     }
     return firstDayIndex;
   }
+
+  function getDayIndex(day) {
+    return weekdays.indexOf(day);
+  }
+
+  console.log("Day: ", today.getDay());
+  console.log("getdayIndex: ", getDayIndex("Sat"));
 
   return (
     <>
@@ -131,13 +138,31 @@ const Schedule = ({ props: data, today }) => {
         <table className={Styles.schedule}>
           <thead>
             <tr>
-              {weekdays.map((day) => (
-                <td key={day} className={Styles.first_row}>
-                  {`${day} `}
-                  {changeDayIndex(firstDayIndex)}
-                </td>
-              ))}
+              {/* first row map */}
+              {weekdays.map(
+                (day) =>
+                  getDayIndex(day) === today.getDay() ? (
+                    <td
+                      key={day}
+                      className={`${Styles.first_row} ${Styles.today}`}
+                    >
+                      {`${day} `}
+                      {changeDayIndex(firstDayIndex)}
+                    </td>
+                  ) : (
+                    <td key={day} className={Styles.first_row}>
+                      {`${day} `}
+                      {changeDayIndex(firstDayIndex)}
+                    </td>
+                  )
+
+                // <td key={day} className={Styles.first_row}>
+                //   {`${day} `}
+                //   {changeDayIndex(firstDayIndex)}
+                // </td>
+              )}
             </tr>
+            {/* rest of schedule map */}
             {data.map((rows) => (
               <tr key={Math.random()}>
                 <td className={Styles.first_col}>
@@ -145,7 +170,7 @@ const Schedule = ({ props: data, today }) => {
                 </td>
                 {rows.map(
                   (cols) =>
-                    cols.y === today.getDay() ? (
+                    cols.col === today.getDay() - 1 ? (
                       <td key={Math.random()} className={Styles.today}>
                         <Link href="/other">
                           <a className={Styles.inner_text}>{cols.content}</a>
