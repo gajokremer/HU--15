@@ -29,7 +29,7 @@ export default function Home() {
     <div>
       <Header></Header>
       <ProfileBar></ProfileBar>
-      <Schedule props={data}></Schedule>
+      <Schedule props={data} today={new Date()}></Schedule>
     </div>
   );
 }
