@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import Styles from "../styles/Schedule.module.css";
+import styles from "../styles/Schedule.module.css";
 
 // Utilizar cada evento como un objeto JSON, el cual contiene toda la información
 // del evento, y luego utilizar un map para ubicarlos en una matriz.
@@ -103,31 +103,30 @@ const Schedule = ({ props: data, today }) => {
     return firstRowValues.indexOf(day);
   }
 
-  console.log("Day: ", today.getDay());
-  console.log("getdayIndex: ", indexOfThisDay("Sat"));
+  console.log("today: ", today.getDate());
 
   return (
     <>
-      <div className={Styles.schedule_section}>
-        <span className={Styles.day_section}>{"Today: "}</span>
-        <span className={Styles.month}>{today.toDateString()}</span>
-        <div className={Styles.day_section}>
-          <div className={Styles.day_picker}>
+      <div className={styles.schedule_section}>
+        <span className={styles.day_section}>{"Today: "}</span>
+        <span className={styles.month}>{today.toDateString()}</span>
+        <div className={styles.day_section}>
+          <div className={styles.day_picker}>
             <button onClick={() => getPreviousWeek()}>&lt;</button>
             <>
-              {/* <span className={Styles.day_change} id={Styles.prev_day}>
+              {/* <span className={styles.day_change} id={styles.prev_day}>
                 <pre onClick={() => getPreviousWeek()}>&lt;</pre>
                 </span>
-              <span className={Styles.week}>Week {week}</span> */}
+              <span className={styles.week}>Week {week}</span> */}
             </>
-            <span className={Styles.week}>
+            <span className={styles.week}>
               {weekStart.toLocaleDateString()}
               {" - "}
               {weekEnd.toLocaleDateString()}
             </span>
             <button onClick={() => getNextWeek()}>&gt;</button>
             <>
-              {/* <span className={Styles.day_change} id={Styles.next_day}>
+              {/* <span className={styles.day_change} id={styles.next_day}>
                 <pre onClick={() => getNextWeek()}>&gt;</pre>
                 <pre onClick={() => nextWeek()}>&gt;</pre>
               </span> */}
@@ -137,59 +136,60 @@ const Schedule = ({ props: data, today }) => {
       </div>
       {/* --------------------------------------------------------- */}
       <div>
-        <table className={Styles.schedule}>
+        <table className={styles.schedule}>
           <thead>
             <tr>
               {/* first row map */}
-              <td className={Styles.first_row}>{"Hours"}</td>
-              {firstRowValues.map(
-                (day) =>
-                  indexOfThisDay(day) === today.getDay() ? (
-                    <td
-                      key={day}
-                      className={`${Styles.first_row} ${Styles.today}`}
-                    >
-                      {`${day} `}
-                      {changeDayIndex(firstDayIndex)}
-                    </td>
-                  ) : (
-                    <td key={day} className={Styles.first_row}>
-                      {`${day} `}
-                      {changeDayIndex(firstDayIndex)}
-                    </td>
-                  )
+              <td className={styles.first_row}>{"Hours"}</td>
+              {firstRowValues.map((day) => (
+                // indexOfThisDay(day) === today.getDay() ? (
+                //   <td
+                //     key={day}
+                //     className={`${styles.first_row} ${styles.today}`}
+                //   >
+                //     {`${day} `}
+                //     {changeDayIndex(firstDayIndex)}
+                //   </td>
+                // ) : (
+                //   <td key={day} className={styles.first_row}>
+                //     {`${day} `}
+                //     {changeDayIndex(firstDayIndex)}
+                //   </td>
+                // )
 
-                // <td key={day} className={Styles.first_row}>
-                //   {`${day} `}
-                //   {changeDayIndex(firstDayIndex)}
-                // </td>
-              )}
+                <td key={day} className={styles.first_row}>
+                  {`${day} ${changeDayIndex(firstDayIndex)}`}
+                </td>
+              ))}
             </tr>
             {/* rest of schedule map */}
             {data.map((rows) => (
               <tr key={Math.random()}>
-                <td className={Styles.first_col}>
+                <td className={styles.first_col}>
                   {hours[hoursCounter++] + ":00"}
                 </td>
                 {rows.map(
                   (cols) =>
-                    cols.col === today.getDay() ? (
-                      <td key={Math.random()} className={Styles.today}>
+                    cols.col === today.getDay() &&
+                    cols.date === today.getDate() ? (
+                      <td key={Math.random()} className={styles.today}>
                         <Link href="/other">
-                          <a className={Styles.inner_text}>{cols.content}</a>
+                          <a
+                            className={styles.inner_text}
+                          >{`|${cols.content}|`}</a>
                         </Link>
                       </td>
                     ) : (
                       <td key={Math.random()}>
                         <Link href="/other">
-                          <a className={Styles.inner_text}>{cols.content}</a>
+                          <a className={styles.inner_text}>{cols.content}</a>
                         </Link>
                       </td>
                     )
 
                   // <td key={Math.random()}>
                   //   <Link href="/other">
-                  //     <a className={Styles.inner_text}>{cols}</a>
+                  //     <a className={styles.inner_text}>{cols}</a>
                   //   </Link>
                   // </td>
                 )}

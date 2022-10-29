@@ -1,45 +1,45 @@
 import Image from "next/image";
 import React from "react";
-import Styles from "../styles/ProfileBar.module.css";
+import styles from "../styles/ProfileBar.module.css";
 
 const ProfileBar = () => {
   return (
     <>
-      <div className={Styles.information_section}>
-        <div className={Styles.user_information}>
-          <div className={Styles.profile_picture_container}>
+      <div className={styles.information_section}>
+        <div className={styles.user_information}>
+          <div className={styles.profile_picture_container}>
             <Image
               priority
               src="/img/profilePicture.jpeg"
               height={140}
               width={140}
-              id={Styles.profile_picture}
+              id={styles.profile_picture}
               alt="profile.picture"
             ></Image>
           </div>
-          <div className={Styles.user_data_container}>
+          <div className={styles.user_data_container}>
             <div>
-              <span id={Styles.user_name}>Gabriel Kremer</span>
+              <span id={styles.user_name}>Gabriel Kremer</span>
             </div>
             <div>
-              <span id={Styles.user_role}>Student</span>
+              <span id={styles.user_role}>Student</span>
             </div>
           </div>
         </div>
 
-        <div className={Styles.events_information}>
+        <div className={styles.events_information}>
           <span>
             <strong>List of events</strong>
           </span>
           <div>
-            <ul id={Styles.event_list}>
+            <ul id={styles.event_list}>
               <li>First event</li>
               <li>Second event</li>
               <li>Third event</li>
               <li>Fourth event</li>
               <li>Fifth event</li>
             </ul>
-            <ul id={Styles.colors_list}>
+            <ul id={styles.colors_list}>
               <li />
               <li />
               <li />
@@ -50,15 +50,15 @@ const ProfileBar = () => {
         </div>
       </div>
 
-      {/* <div className={Styles.schedule_section}>
-        <div className={Styles.month}>January</div>
-        <div className={Styles.day_section}>
-          <div className={Styles.day_picker}>
-            <span className={Styles.day_change} id={Styles.prev_day}>
+      {/* <div className={styles.schedule_section}>
+        <div className={styles.month}>January</div>
+        <div className={styles.day_section}>
+          <div className={styles.day_picker}>
+            <span className={styles.day_change} id={styles.prev_day}>
               <pre>&lt;</pre>
             </span>
-            <span className={Styles.week}>Week 1</span>
-            <span className={Styles.day_change} id={Styles.next_day}>
+            <span className={styles.week}>Week 1</span>
+            <span className={styles.day_change} id={styles.next_day}>
               <pre>&gt;</pre>
             </span>
           </div>
