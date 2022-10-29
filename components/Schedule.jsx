@@ -73,7 +73,7 @@ const Schedule = ({ props: data, today }) => {
     "22",
   ];
 
-  let counter = 0;
+  let hoursCounter = 0;
 
   let firstDayIndex = weekStart.getDate() - 1;
   let lastDayIndex = weekEnd.getDate();
@@ -83,15 +83,11 @@ const Schedule = ({ props: data, today }) => {
     weekStart.getFullYear()
   );
 
-  // console.log("week start month", weekStart.getMonth() + 1);
-  // console.log("week end month", weekEnd.getMonth() + 1);
-
   console.log("firstDayIndex: ", firstDayIndex);
   console.log("lastDayIndex: ", lastDayIndex);
   console.log("daysThisMonth: ", daysThisMonth);
 
-  //function to evaluate if the current index is inside the range of the current week, and if not, to make it 1 and start counting again
-  function evaluateIndex() {
+  function changeDayIndex() {
     if (firstDayIndex <= daysThisMonth) {
       firstDayIndex++;
     }
@@ -138,21 +134,37 @@ const Schedule = ({ props: data, today }) => {
               {weekdays.map((day) => (
                 <td key={day} className={Styles.first_row}>
                   {`${day} `}
-                  {evaluateIndex(firstDayIndex)}
-                  {/* {firstDayIndex++} */}
+                  {changeDayIndex(firstDayIndex)}
                 </td>
               ))}
             </tr>
             {data.map((rows) => (
               <tr key={Math.random()}>
-                <td className={Styles.first_col}>{hours[counter++] + ":00"}</td>
-                {rows.map((cols) => (
-                  <td key={Math.random()}>
-                    <Link href="/other">
-                      <a className={Styles.inner_text}>{cols}</a>
-                    </Link>
-                  </td>
-                ))}
+                <td className={Styles.first_col}>
+                  {hours[hoursCounter++] + ":00"}
+                </td>
+                {rows.map(
+                  (cols) =>
+                    cols.y === today.getDay() ? (
+                      <td key={Math.random()} className={Styles.today}>
+                        <Link href="/other">
+                          <a className={Styles.inner_text}>{cols.content}</a>
+                        </Link>
+                      </td>
+                    ) : (
+                      <td key={Math.random()}>
+                        <Link href="/other">
+                          <a className={Styles.inner_text}>{cols.content}</a>
+                        </Link>
+                      </td>
+                    )
+
+                  // <td key={Math.random()}>
+                  //   <Link href="/other">
+                  //     <a className={Styles.inner_text}>{cols}</a>
+                  //   </Link>
+                  // </td>
+                )}
               </tr>
             ))}
           </thead>
