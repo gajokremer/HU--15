@@ -11,6 +11,8 @@ const Schedule = ({ props: data, today }) => {
 
   // const today = new Date();
 
+  // today = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+
   function getWeekStart(currentDate) {
     var weekStart = new Date(
       currentDate.setDate(currentDate.getDate() - currentDate.getDay() + 0)
@@ -53,7 +55,7 @@ const Schedule = ({ props: data, today }) => {
     return new Date(year, month, 0).getDate();
   }
 
-  const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const firstRowValues = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const hours = [
     "7",
     "8",
@@ -97,12 +99,12 @@ const Schedule = ({ props: data, today }) => {
     return firstDayIndex;
   }
 
-  function getDayIndex(day) {
-    return weekdays.indexOf(day);
+  function indexOfThisDay(day) {
+    return firstRowValues.indexOf(day);
   }
 
   console.log("Day: ", today.getDay());
-  console.log("getdayIndex: ", getDayIndex("Sat"));
+  console.log("getdayIndex: ", indexOfThisDay("Sat"));
 
   return (
     <>
@@ -133,15 +135,16 @@ const Schedule = ({ props: data, today }) => {
           </div>
         </div>
       </div>
-
+      {/* --------------------------------------------------------- */}
       <div>
         <table className={Styles.schedule}>
           <thead>
             <tr>
               {/* first row map */}
-              {weekdays.map(
+              <td className={Styles.first_row}>{"Hours"}</td>
+              {firstRowValues.map(
                 (day) =>
-                  getDayIndex(day) === today.getDay() ? (
+                  indexOfThisDay(day) === today.getDay() ? (
                     <td
                       key={day}
                       className={`${Styles.first_row} ${Styles.today}`}
@@ -170,7 +173,7 @@ const Schedule = ({ props: data, today }) => {
                 </td>
                 {rows.map(
                   (cols) =>
-                    cols.col === today.getDay() - 1 ? (
+                    cols.col === today.getDay() ? (
                       <td key={Math.random()} className={Styles.today}>
                         <Link href="/other">
                           <a className={Styles.inner_text}>{cols.content}</a>

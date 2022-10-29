@@ -4,7 +4,7 @@ function constructMatrix(rows, cols) {
     array.push([]);
     for (let j = 0; j < cols; j++) {
       // array[i].push("---");
-      const tableContent = { content: "---", row: i, col: j };
+      const tableContent = { content: "---", row: i, col: j, date: new Date() };
       array[i].push(tableContent);
     }
   }
