@@ -1,3 +1,5 @@
+import dbSelector from "./dbSelector";
+
 function constructMatrix(rows, cols) {
   const array = [];
   for (let i = 0; i < rows; i++) {

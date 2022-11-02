@@ -27,7 +27,7 @@ export default function Home() {
   return (
     <div>
       <Header></Header>
-      <ProfileBar></ProfileBar>
+      <ProfileBar name={"Gabriel Kremer"} role={"Student"}></ProfileBar>
       <Schedule props={data} today={new Date()}></Schedule>
     </div>
   );

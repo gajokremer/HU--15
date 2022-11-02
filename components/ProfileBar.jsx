@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import styles from "../styles/ProfileBar.module.css";
 
-const ProfileBar = () => {
+const ProfileBar = ({ name, role }) => {
   return (
     <>
       <div className={styles.information_section}>
@@ -19,10 +19,10 @@ const ProfileBar = () => {
           </div>
           <div className={styles.user_data_container}>
             <div>
-              <span id={styles.user_name}>Gabriel Kremer</span>
+              <span id={styles.user_name}>{name}</span>
             </div>
             <div>
-              <span id={styles.user_role}>Student</span>
+              <span id={styles.user_role}>{role}</span>
             </div>
           </div>
         </div>
