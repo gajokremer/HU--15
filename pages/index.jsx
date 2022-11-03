@@ -4,6 +4,17 @@ import Header from "../components/Header";
 import ProfileBar from "../components/ProfileBar";
 import Schedule from "../components/Schedule";
 
+// async function solicitarDatos() {
+//   let response = await fetch("url", {
+//     method: "POST",
+//     headers: {
+//       Accept: "application-json",
+//       "Content-type": "application-json",
+//     },
+//     body: JSON.stringify(name),
+//   });
+// }
+
 export default function Home() {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(false);
