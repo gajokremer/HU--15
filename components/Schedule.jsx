@@ -6,12 +6,35 @@ import styles from "../styles/Schedule.module.css";
 // del evento, y luego utilizar un map para ubicarlos en una matriz.
 // Finalmente, se pasa la matriz al front-end y se renderiza en la tabla.
 
-const Schedule = ({ props: data, today }) => {
-  // console.log("Data (Schedule): ", data);
+// async function solicitarDatos() {
+//   let response = await fetch("url", {
+//     method: "POST",
+//     headers: {
+//       Accept: "application-json",
+//       "Content-type": "application-json",
+//     },
+//     body: JSON.stringify(name),
+//   });
+// }
 
-  // const today = new Date();
+const Schedule = ({ info: data, today }) => {
+  useEffect(() => {
+    console.log("======Schedule loaded======");
+  });
 
-  // today = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1);
+  // const [data, setData] = useState(info);
+
+  // useEffect(() => {
+  //   fetch("/api/hello")
+  //     .then((res) => res.json())
+  //     .then((matrix) => {
+  //       console.log("Matrix fetched");
+  //       setData(matrix);
+  //     });
+  // }, [weekStart, weekEnd]);
+
+  // // console.log("data: ", data);
+  // // console.log("info: ", info);
 
   function getWeekStart(currentDate) {
     var weekStart = new Date(

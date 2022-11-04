@@ -4,17 +4,6 @@ import Header from "../components/Header";
 import ProfileBar from "../components/ProfileBar";
 import Schedule from "../components/Schedule";
 
-// async function solicitarDatos() {
-//   let response = await fetch("url", {
-//     method: "POST",
-//     headers: {
-//       Accept: "application-json",
-//       "Content-type": "application-json",
-//     },
-//     body: JSON.stringify(name),
-//   });
-// }
-
 export default function Home() {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(false);
@@ -32,14 +21,13 @@ export default function Home() {
   if (isLoading) return <p>Loading...</p>;
   if (!data) return <p>No table data</p>;
 
-  // console.log("Data");
-  // console.log(data);
+  // const data = [];
 
   return (
     <div>
       <Header></Header>
       <ProfileBar name={"Gabriel Kremer"} role={"Student"}></ProfileBar>
-      <Schedule props={data} today={new Date()}></Schedule>
+      <Schedule info={data} today={new Date()}></Schedule>
     </div>
   );
 }

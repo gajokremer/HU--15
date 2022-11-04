@@ -6,5 +6,4 @@ export default async function handler(req, res) {
   const matrix = await constructMatrix(16, 7);
   // console.log("Matrix: ", matrix);
   return res.json(matrix);
-
 }
