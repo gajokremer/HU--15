@@ -14,24 +14,49 @@ async function constructMatrix(rows, cols) {
     [username]
   );
 
-  const activities = dbData.rows[0];
+  const activities = dbData.rows;
   console.log("activities: ", activities);
+
+  const evaluateActivity = (activity, x, y) => {
+    console.log("activity: ", activity.idactivity);
+    return false;
+  };
+
+  const makeActivity = (element) => {
+    const activity = {
+      id: element.idactivity,
+      name: element.activity_name,
+      date: element.date_activity,
+      start: element.start_hour,
+      end: element.end_hour,
+      manager: element.manager,
+    };
+    return activity;
+  };
 
   const matrix = [];
   for (let i = 0; i < rows; i++) {
     matrix.push([]);
     for (let j = 0; j < cols; j++) {
-      // array[i].push("---");
-      const date = new Date();
-      const tableContent = {
-        content: "---",
-        row: i,
-        col: j,
-        date: date.getDate(),
-      };
-      matrix[i].push(tableContent);
+      const activity = makeActivity(activities[0]);
+      matrix[i].push(activity);
     }
   }
+
+  // const matrix = [];
+  // for (let i = 0; i < rows; i++) {
+  //   matrix.push([]);
+  //   for (let j = 0; j < cols; j++) {
+  //     const date = new Date();
+  //     const tableContent = {
+  //       content: "---",
+  //       row: i,
+  //       col: j,
+  //       date: date.getDate(),
+  //     };
+  //     matrix[i].push(tableContent);
+  //   }
+  // }
   return matrix;
 }
 

@@ -199,7 +199,7 @@ const Schedule = ({ info: data, today }) => {
                         <Link href="/other">
                           <a
                             className={styles.inner_text}
-                          >{`|${cols.content}|`}</a>
+                          >{`|${cols.id}|`}</a>
                         </Link>
                       </td>
                     ) : (
