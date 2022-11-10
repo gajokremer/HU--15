@@ -217,7 +217,7 @@ const Schedule = ({ info, today }) => {
                     cols.year === today.getFullYear() ? (
                       <td key={Math.random()} className={styles.today}>
                         <Link href="/other">
-                          <a className={styles.inner_text}>{`|${cols.id}|`}</a>
+                          <a className={styles.inner_text}>{`-${cols.id}-`}</a>
                         </Link>
                       </td>
                     ) : (

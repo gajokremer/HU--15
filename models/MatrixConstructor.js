@@ -8,6 +8,12 @@ async function constructMatrix(rows, cols, req) {
   //   [username]
   // );
 
+  // todo: Modify the query to get the data from the specified week
+
+  const { weekStart, weekEnd } = req;
+  console.log("weekstart: ", weekStart);
+  console.log("weekend: ", weekEnd);
+
   const username = "Emily";
   const dbData = await db.query(
     "SELECT * FROM ACTIVITY WHERE IDACTIVITY in (SELECT e.idActivity FROM PARTICIPANT e WHERE IDPARTICIPANT = $1) OR manager = $1;",
@@ -29,6 +35,8 @@ async function constructMatrix(rows, cols, req) {
       start: element.start_hour,
       end: element.end_hour,
       manager: element.manager,
+      row: 0,
+      col: 0,
     };
     return activity;
   };
@@ -51,10 +59,6 @@ async function constructMatrix(rows, cols, req) {
 
   // console.log("weekStart: ", weekStart);
   // console.log("weekEnd: ", weekEnd);
-
-  const { weekStart, weekEnd } = req;
-  console.log("weekstart: ", weekStart);
-  console.log("weekend: ", weekEnd);
 
   const matrix = [];
   for (let i = 0; i < rows; i++) {
