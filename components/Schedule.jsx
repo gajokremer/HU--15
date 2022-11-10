@@ -25,32 +25,34 @@ async function requestData(weekStart, weekEnd) {
 }
 
 const Schedule = ({ info, today }) => {
-  useEffect(() => {
-    console.log("======Schedule loaded======");
-  });
+  // useEffect(() => {
+  console.log("======Schedule loaded======");
+  // });
 
   function getWeekStart(currentDate) {
-    var weekStart = new Date(
+    let weekStart = new Date(
       currentDate.setDate(currentDate.getDate() - currentDate.getDay() + 0)
     );
+    console.log("weekStart:", weekStart);
     return weekStart;
   }
 
   function getWeekEnd(currentDate) {
-    var weekEnd = new Date(
+    let weekEnd = new Date(
       currentDate.setDate(currentDate.getDate() - currentDate.getDay() + 6)
     );
+    console.log("weekend:", weekEnd);
     return weekEnd;
   }
 
   const [weekStart, setWeekStart] = useState(() => {
     console.log("first run");
-    return getWeekStart(today);
+    return getWeekStart(new Date());
   });
 
   const [weekEnd, setWeekEnd] = useState(() => {
     console.log("first run");
-    return getWeekEnd(today);
+    return getWeekEnd(new Date());
   });
 
   useEffect(() => {
@@ -101,10 +103,6 @@ const Schedule = ({ info, today }) => {
     weekStart.getFullYear()
   );
 
-  // console.log("firstDayIndex: ", firstDayIndex);
-  // console.log("lastDayIndex: ", lastDayIndex);
-  // console.log("daysThisMonth: ", daysThisMonth);
-
   function changeDayIndex() {
     if (firstDayIndex <= daysThisMonth) {
       firstDayIndex++;
@@ -119,7 +117,9 @@ const Schedule = ({ info, today }) => {
     return firstRowValues.indexOf(day);
   }
 
-  console.log("today: ", today.getDate());
+  // console.log("today: ", today);
+  // console.log("today date: ", today.getDate());
+  // console.log("today day: ", today.getDay());
 
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(false);
@@ -129,19 +129,19 @@ const Schedule = ({ info, today }) => {
     fetch("/api/hello", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: "John Doe" }),
+      body: JSON.stringify({ weekStart, weekEnd }),
     })
       .then((res) => res.json())
       .then((data) => {
         setData(data);
         setLoading(false);
       });
-  }, []);
+  }, [weekStart, weekEnd]);
 
   if (isLoading) return <p className={styles.warning}>Loading...</p>;
   if (!data) return <p className={styles.warning}>No table data</p>;
 
-  console.log("data: ", data);
+  // console.log("data: ", data);
 
   return (
     <>
@@ -211,15 +211,17 @@ const Schedule = ({ info, today }) => {
                     cols.col === today.getDay() &&
                     cols.date === today.getDate() ? (
                       <td key={Math.random()} className={styles.today}>
-                        <Link href="/other">
+                        <span className={styles.inner_text}>{cols.date}</span>
+                        {/* <Link href="/other">
                           <a className={styles.inner_text}>{`|${cols.id}|`}</a>
-                        </Link>
+                        </Link> */}
                       </td>
                     ) : (
                       <td key={Math.random()}>
-                        <Link href="/other">
+                        <span>{cols.date}</span>
+                        {/* <Link href="/other">
                           <a className={styles.inner_text}>{cols.id}</a>
-                        </Link>
+                        </Link> */}
                       </td>
                     )
 

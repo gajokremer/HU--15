@@ -25,7 +25,7 @@ export default function Home() {
   // if (isLoading) return <p>Loading...</p>;
   // if (!data) return <p>No table data</p>;
 
-  let data = null;
+  const data = null;
 
   return (
     <div>

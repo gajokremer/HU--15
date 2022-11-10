@@ -1,7 +1,7 @@
 import db from "../repository/connection-api/database-pool";
 import dbSelector from "./dbSelector";
 
-async function constructMatrix(rows, cols) {
+async function constructMatrix(rows, cols, req) {
   // const username = "Emily";
   // const dbData = await db.query(
   //   "SELECT activity_name FROM ACTIVITY WHERE IDACTIVITY in (SELECT e.idActivity FROM PARTICIPANT e WHERE IDPARTICIPANT = $1) OR manager = $1;",
@@ -18,9 +18,7 @@ async function constructMatrix(rows, cols) {
   console.log("activities: ", activities);
 
   const evaluateActivity = (activity, x, y) => {
-    // console.log("activity: ", activity.idactivity);
     const activityDate = activity.date;
-    // console.log("activityDate: ", activityDate);
   };
 
   const makeActivity = (element) => {
@@ -51,11 +49,19 @@ async function constructMatrix(rows, cols) {
   //   }
   // }
 
+  // console.log("weekStart: ", weekStart);
+  // console.log("weekEnd: ", weekEnd);
+
+  const { weekStart, weekEnd } = req;
+  console.log("weekstart: ", weekStart);
+  console.log("weekend: ", weekEnd);
+
   const matrix = [];
   for (let i = 0; i < rows; i++) {
+    let date = new Date(weekStart);
     matrix.push([]);
     for (let j = 0; j < cols; j++) {
-      const date = new Date();
+      // const date = new Date();
       const tableContent = {
         id: "---",
         row: i,
@@ -63,6 +69,7 @@ async function constructMatrix(rows, cols) {
         date: date.getDate(),
       };
       matrix[i].push(tableContent);
+      date.setDate(date.getDate() + 1);
     }
   }
   return matrix;
