@@ -2,13 +2,14 @@
 .information_section {
   /* border: 2px solid orange; */
   border: 2px solid var(--dark-main);
-  border-bottom-color: white;
+  /* border-bottom-color: white; */
+  border-bottom-color: var(--dark-text);
   height: max-content;
   justify-content: center;
   padding: 0.5rem;
   background-color: var(--dark-main);
   display: flex;
-  color: white;
+  color: var(--dark-text);
 }
 
 .user_information {
@@ -21,7 +22,8 @@
 
 .profile_picture_container {
   /* border: 2px solid greenyellow; */
-  border: 2px solid white;
+  /* border: 2px solid white; */
+  border: 2px solid var(--dark-body);
   border-radius: 5rem;
   display: flex;
 }
@@ -43,7 +45,8 @@
 }
 
 .user_data_container div {
-  border: 1px solid white;
+  /* border: 1px solid white; */
+  border: 1.5px solid var(--dark-text);
   background-color: var(--dark-hover);
   width: max-content;
   margin: 0.5rem;
@@ -52,8 +55,9 @@
 }
 
 .events_information {
-  border: 1px solid var(--dark-main);
-  border-left-color: white;
+  border: 1.5px solid var(--dark-main);
+  /* border-left-color: white; */
+  border-left-color: var(--dark-text);
   /* border: 2px solid blue; */
   padding: 0.5rem;
   width: max-content;

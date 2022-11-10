@@ -64,7 +64,7 @@ const Schedule = ({ info, today }) => {
     setWeekEnd(new Date(weekEnd.setDate(weekEnd.getDate() + 7)));
   }
 
-  function getPreviousWeek() {
+  function getPrevWeek() {
     setWeekStart(new Date(weekStart.setDate(weekStart.getDate() - 7)));
     setWeekEnd(new Date(weekEnd.setDate(weekEnd.getDate() - 7)));
   }
@@ -138,19 +138,21 @@ const Schedule = ({ info, today }) => {
       });
   }, [weekStart, weekEnd]);
 
-  if (isLoading) return <p className={styles.warning}>Loading...</p>;
+  // if (isLoading) return <p className={styles.warning}>Loading...</p>;
   if (!data) return <p className={styles.warning}>No table data</p>;
 
   // console.log("data: ", data);
 
   return (
     <>
-      <div className={styles.schedule_section}>
+      <div className={styles.date_section}>
         <span className={styles.day_section}>{"Today: "}</span>
         <span className={styles.month}>{today.toDateString()}</span>
         <div className={styles.day_section}>
           <div className={styles.day_picker}>
-            <button onClick={() => getPreviousWeek()}>&lt;</button>
+            <button className={styles.day_change} onClick={() => getPrevWeek()}>
+              &lt;
+            </button>
             <>
               {/* <span className={styles.day_change} id={styles.prev_day}>
                 <pre onClick={() => getPreviousWeek()}>&lt;</pre>
@@ -162,7 +164,9 @@ const Schedule = ({ info, today }) => {
               {" - "}
               {weekEnd.toLocaleDateString()}
             </span>
-            <button onClick={() => getNextWeek()}>&gt;</button>
+            <button className={styles.day_change} onClick={() => getNextWeek()}>
+              &gt;
+            </button>
             <>
               {/* <span className={styles.day_change} id={styles.next_day}>
                 <pre onClick={() => getNextWeek()}>&gt;</pre>
@@ -173,7 +177,7 @@ const Schedule = ({ info, today }) => {
         </div>
       </div>
       {/* --------------------------------------------------------- */}
-      <div>
+      <div className={styles.schedule_section}>
         <table className={styles.schedule}>
           <thead>
             <tr>
@@ -209,19 +213,18 @@ const Schedule = ({ info, today }) => {
                 {rows.map(
                   (cols) =>
                     cols.col === today.getDay() &&
-                    cols.date === today.getDate() ? (
+                    cols.date === today.getDate() &&
+                    cols.year === today.getFullYear() ? (
                       <td key={Math.random()} className={styles.today}>
-                        <span className={styles.inner_text}>{cols.date}</span>
-                        {/* <Link href="/other">
+                        <Link href="/other">
                           <a className={styles.inner_text}>{`|${cols.id}|`}</a>
-                        </Link> */}
+                        </Link>
                       </td>
                     ) : (
                       <td key={Math.random()}>
-                        <span>{cols.date}</span>
-                        {/* <Link href="/other">
+                        <Link href="/other">
                           <a className={styles.inner_text}>{cols.id}</a>
-                        </Link> */}
+                        </Link>
                       </td>
                     )
 

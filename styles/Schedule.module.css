@@ -1,5 +1,5 @@
 /* SCHEDULE SECTION */
-.schedule_section {
+.date_section {
   /* border: 2px solid brown; */
   background-color: var(--dark-main);
   color: var(--dark-text);
@@ -45,6 +45,7 @@
 
 .day_change:hover {
   background-color: var(--dark-hover);
+  color: white;
 }
 
 .schedule_section {
@@ -55,18 +56,22 @@
 
 .schedule {
   background-color: var(--dark-hover);
-  border: 1px solid white;
+  border: 1px solid var(--dark-text);
   border-radius: 0.5rem;
   width: 45rem;
   padding: 0.5rem;
   margin: 0.5rem;
+  display: grid;
+  grid-gap: 0.5rem;
 }
 
 .first_row,
 .first_col {
   font-weight: 600;
   /* color: #79788c; */
-  color: #a8a8a8;
+  /* color: #a8a8a8; */
+
+  color: #c8c8c8;
 }
 
 .schedule td.first_row:hover,
@@ -75,7 +80,8 @@
 }
 
 .schedule td {
-  border: 1px solid white;
+  /* border: 0.2px solid white; */
+  border: 1.5px solid var(--dark-body);
   border-radius: 0.2rem;
   text-align: center;
   padding: 0.5rem;
@@ -89,7 +95,7 @@
 .today {
   background-color: #f44949;
   /* background-color: #fc6d65; */
-  color: var(--dark-text);
+  /* color: var(--dark-text); */
 }
 
 .schedule td.today:hover {
@@ -101,7 +107,8 @@
 }
 
 .inner_text {
-  color: var(--dark-text);
+  /* color: var(--dark-text); */
+  color: white;
   text-decoration: none;
 }
 

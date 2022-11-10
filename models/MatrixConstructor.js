@@ -67,6 +67,7 @@ async function constructMatrix(rows, cols, req) {
         row: i,
         col: j,
         date: date.getDate(),
+        year: date.getFullYear(),
       };
       matrix[i].push(tableContent);
       date.setDate(date.getDate() + 1);
