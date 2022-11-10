@@ -18,8 +18,9 @@ async function constructMatrix(rows, cols) {
   console.log("activities: ", activities);
 
   const evaluateActivity = (activity, x, y) => {
-    console.log("activity: ", activity.idactivity);
-    return false;
+    // console.log("activity: ", activity.idactivity);
+    const activityDate = activity.date;
+    // console.log("activityDate: ", activityDate);
   };
 
   const makeActivity = (element) => {
@@ -34,29 +35,36 @@ async function constructMatrix(rows, cols) {
     return activity;
   };
 
-  const matrix = [];
-  for (let i = 0; i < rows; i++) {
-    matrix.push([]);
-    for (let j = 0; j < cols; j++) {
-      const activity = makeActivity(activities[0]);
-      matrix[i].push(activity);
-    }
-  }
-
   // const matrix = [];
   // for (let i = 0; i < rows; i++) {
   //   matrix.push([]);
   //   for (let j = 0; j < cols; j++) {
-  //     const date = new Date();
-  //     const tableContent = {
-  //       content: "---",
-  //       row: i,
-  //       col: j,
-  //       date: date.getDate(),
-  //     };
-  //     matrix[i].push(tableContent);
+  //     // const activity = makeActivity(activities[0]);
+  //     // matrix[i].push(activity);
+
+  //     let found = false;
+  //     let activity = null;
+  //     for (let k = 0; k < activities.length; k++) {
+  //       activity = makeActivity(activities[k]);
+  //     }
+  //     matrix[i].push(activity);
   //   }
   // }
+
+  const matrix = [];
+  for (let i = 0; i < rows; i++) {
+    matrix.push([]);
+    for (let j = 0; j < cols; j++) {
+      const date = new Date();
+      const tableContent = {
+        id: "---",
+        row: i,
+        col: j,
+        date: date.getDate(),
+      };
+      matrix[i].push(tableContent);
+    }
+  }
   return matrix;
 }
 

@@ -5,23 +5,27 @@ import ProfileBar from "../components/ProfileBar";
 import Schedule from "../components/Schedule";
 
 export default function Home() {
-  const [data, setData] = useState(null);
-  const [isLoading, setLoading] = useState(false);
+  // const [data, setData] = useState(null);
+  // const [isLoading, setLoading] = useState(false);
 
-  useEffect(() => {
-    setLoading(true);
-    fetch("/api/hello")
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-        setLoading(false);
-      });
-  }, []);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   fetch("/api/hello", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ name: "John Doe" }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setData(data);
+  //       setLoading(false);
+  //     });
+  // }, []);
 
-  if (isLoading) return <p>Loading...</p>;
-  if (!data) return <p>No table data</p>;
+  // if (isLoading) return <p>Loading...</p>;
+  // if (!data) return <p>No table data</p>;
 
-  // const data = [];
+  let data = null;
 
   return (
     <div>

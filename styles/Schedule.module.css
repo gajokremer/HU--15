@@ -2,7 +2,7 @@
 .schedule_section {
   /* border: 2px solid brown; */
   background-color: var(--dark-main);
-  color: white;
+  color: var(--dark-text);
   justify-content: center;
   text-align: center;
   padding: 0.5rem;
@@ -65,7 +65,8 @@
 .first_row,
 .first_col {
   font-weight: 600;
-  color: #79788c;
+  /* color: #79788c; */
+  color: #a8a8a8;
 }
 
 .schedule td.first_row:hover,
@@ -88,7 +89,7 @@
 .today {
   background-color: #f44949;
   /* background-color: #fc6d65; */
-  color: white;
+  color: var(--dark-text);
 }
 
 .schedule td.today:hover {
@@ -100,6 +101,14 @@
 }
 
 .inner_text {
-  color: white;
+  color: var(--dark-text);
   text-decoration: none;
+}
+
+.warning {
+  margin: 10rem;
+  font-style: italic;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

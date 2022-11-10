@@ -1,40 +1,33 @@
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "../styles/Schedule.module.css";
 
 // Utilizar cada evento como un objeto JSON, el cual contiene toda la información
 // del evento, y luego utilizar un map para ubicarlos en una matriz.
 // Finalmente, se pasa la matriz al front-end y se renderiza en la tabla.
 
-// async function solicitarDatos() {
-//   let response = await fetch("url", {
-//     method: "POST",
-//     headers: {
-//       Accept: "application-json",
-//       "Content-type": "application-json",
-//     },
-//     body: JSON.stringify(name),
-//   });
-// }
+async function requestData(weekStart, weekEnd) {
+  //   let response = await fetch("ul", {
+  //     method: "POST",
+  //     headers: {
+  //       Accept: "application-json",
+  //       "Content-type": "application-json",
+  //     },
+  //     body: JSON.stringify(name),
+  //   });
 
-const Schedule = ({ info: data, today }) => {
+  let response = await fetch("/api/hello", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ weekStart, weekEnd }),
+  });
+  return response.json();
+}
+
+const Schedule = ({ info, today }) => {
   useEffect(() => {
     console.log("======Schedule loaded======");
   });
-
-  // const [data, setData] = useState(info);
-
-  // useEffect(() => {
-  //   fetch("/api/hello")
-  //     .then((res) => res.json())
-  //     .then((matrix) => {
-  //       console.log("Matrix fetched");
-  //       setData(matrix);
-  //     });
-  // }, [weekStart, weekEnd]);
-
-  // // console.log("data: ", data);
-  // // console.log("info: ", info);
 
   function getWeekStart(currentDate) {
     var weekStart = new Date(
@@ -128,6 +121,28 @@ const Schedule = ({ info: data, today }) => {
 
   console.log("today: ", today.getDate());
 
+  const [data, setData] = useState(null);
+  const [isLoading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch("/api/hello", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: "John Doe" }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        setLoading(false);
+      });
+  }, []);
+
+  if (isLoading) return <p className={styles.warning}>Loading...</p>;
+  if (!data) return <p className={styles.warning}>No table data</p>;
+
+  console.log("data: ", data);
+
   return (
     <>
       <div className={styles.schedule_section}>
@@ -197,15 +212,13 @@ const Schedule = ({ info: data, today }) => {
                     cols.date === today.getDate() ? (
                       <td key={Math.random()} className={styles.today}>
                         <Link href="/other">
-                          <a
-                            className={styles.inner_text}
-                          >{`|${cols.id}|`}</a>
+                          <a className={styles.inner_text}>{`|${cols.id}|`}</a>
                         </Link>
                       </td>
                     ) : (
                       <td key={Math.random()}>
                         <Link href="/other">
-                          <a className={styles.inner_text}>{cols.content}</a>
+                          <a className={styles.inner_text}>{cols.id}</a>
                         </Link>
                       </td>
                     )

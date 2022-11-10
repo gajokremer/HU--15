@@ -21,8 +21,9 @@
 
 .profile_picture_container {
   /* border: 2px solid greenyellow; */
-  border: 1px solid white;
+  border: 2px solid white;
   border-radius: 5rem;
+  display: flex;
 }
 
 #profile_picture {
