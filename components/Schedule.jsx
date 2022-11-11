@@ -213,9 +213,10 @@ const Schedule = ({ info, today }) => {
                 </td>
                 {rows.map(
                   (cols) =>
-                    cols.col === today.getDay() &&
-                    cols.date === today.getDate() &&
-                    cols.year === today.getFullYear() ? (
+                    cols.position.col === today.getDay() &&
+                    cols.date.day === today.getDate() &&
+                    cols.date.month === today.getMonth() &&
+                    cols.date.year === today.getFullYear() ? (
                       <td key={Math.random()} className={styles.today}>
                         <Link href="/other">
                           <a className={styles.inner_text}>{`-${cols.id}-`}</a>

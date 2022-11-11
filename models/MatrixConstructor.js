@@ -34,14 +34,23 @@ async function constructMatrix(rows, cols, req) {
     const activity = {
       id: element.idactivity,
       name: element.activity_name,
-      date: element.date_activity,
-      startTime: +element.start_hour.split(":")[0],
-      endTime: +element.end_hour.split(":")[0],
-      duration:
-        +element.end_hour.split(":")[0] - +element.start_hour.split(":")[0],
+      // date: element.date_activity,
+      date: {
+        day: element.date_activity.getDate(),
+        month: element.date_activity.getMonth(),
+        year: element.date_activity.getFullYear(),
+      },
+      time: {
+        start: +element.start_hour.split(":")[0],
+        end: +element.end_hour.split(":")[0],
+        duration:
+          +element.end_hour.split(":")[0] - +element.start_hour.split(":")[0],
+      },
       manager: element.manager,
-      row: i,
-      col: j,
+      position: {
+        row: i,
+        col: j,
+      },
     };
     return activity;
   };
@@ -87,10 +96,15 @@ async function constructMatrix(rows, cols, req) {
       if (!found) {
         const tableContent = {
           id: "---",
-          row: i,
-          col: j,
-          date: date.getDate(),
-          year: date.getFullYear(),
+          position: {
+            row: i,
+            col: j,
+          },
+          date: {
+            day: date.getDate(),
+            month: date.getMonth(),
+            year: date.getFullYear(),
+          },
         };
         matrix[i].push(tableContent);
         date.setDate(date.getDate() + 1);
