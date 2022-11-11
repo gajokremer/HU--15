@@ -55,7 +55,8 @@
 }
 
 .schedule {
-  background-color: var(--dark-hover);
+  /* background-color: var(--dark-hover); */
+  background-color: whitesmoke;
   border: 1px solid var(--dark-text);
   border-radius: 0.5rem;
   width: 45rem;
@@ -69,19 +70,20 @@
 .first_col {
   font-weight: 600;
   /* color: #79788c; */
-  /* color: #a8a8a8; */
-
-  color: #c8c8c8;
+  color: #a8a8a8;
+  /* color: #c8c8c8; */
 }
 
 .schedule td.first_row:hover,
 .schedule td.first_col:hover {
-  background-color: var(--dark-hover);
+  /* background-color: var(--dark-hover); */
+  background-color: white;
 }
 
 .schedule td {
   /* border: 0.2px solid white; */
-  border: 1.5px solid var(--dark-body);
+  /* border: 1.5px solid var(--dark-body); */
+  border: 1.5px solid black;
   border-radius: 0.2rem;
   text-align: center;
   padding: 0.5rem;
@@ -107,8 +109,8 @@
 }
 
 .inner_text {
-  /* color: var(--dark-text); */
-  color: white;
+  color: var(--dark-text);
+  /* color: white; */
   text-decoration: none;
 }
 

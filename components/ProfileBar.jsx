@@ -6,7 +6,7 @@ const ProfileBar = ({ name, role }) => {
   return (
     <>
       <div className={styles.information_section}>
-        <div className={styles.user_information}>
+        {/* <div className={styles.user_information}>
           <div className={styles.profile_picture_container}>
             <Image
               priority
@@ -25,7 +25,7 @@ const ProfileBar = ({ name, role }) => {
               <span id={styles.user_role}>{role}</span>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className={styles.events_information}>
           <span>

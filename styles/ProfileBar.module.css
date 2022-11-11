@@ -56,7 +56,6 @@
 
 .events_information {
   border: 1.5px solid var(--dark-main);
-  /* border-left-color: white; */
   border-left-color: var(--dark-text);
   /* border: 2px solid blue; */
   padding: 0.5rem;

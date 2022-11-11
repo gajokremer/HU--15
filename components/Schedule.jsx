@@ -95,7 +95,7 @@ const Schedule = ({ info, today }) => {
 
   let hoursCounter = 0;
 
-  let firstDayIndex = weekStart.getDate() - 1;
+  let dayIndex = weekStart.getDate() - 1;
   // let lastDayIndex = weekEnd.getDate();
 
   const daysThisMonth = daysInMonth(
@@ -104,13 +104,13 @@ const Schedule = ({ info, today }) => {
   );
 
   function changeDayIndex() {
-    if (firstDayIndex <= daysThisMonth) {
-      firstDayIndex++;
+    if (dayIndex <= daysThisMonth) {
+      dayIndex++;
     }
-    if (firstDayIndex > daysThisMonth) {
-      firstDayIndex = 1;
+    if (dayIndex > daysThisMonth) {
+      dayIndex = 1;
     }
-    return firstDayIndex;
+    return dayIndex;
   }
 
   function indexOfThisDay(day) {
@@ -183,26 +183,28 @@ const Schedule = ({ info, today }) => {
             <tr>
               {/* first row map */}
               <td className={styles.first_row}>{"Hours"}</td>
-              {firstRowValues.map((day) => (
-                // indexOfThisDay(day) === today.getDay() ? (
-                //   <td
-                //     key={day}
-                //     className={`${styles.first_row} ${styles.today}`}
-                //   >
-                //     {`${day} `}
-                //     {changeDayIndex(firstDayIndex)}
-                //   </td>
-                // ) : (
-                //   <td key={day} className={styles.first_row}>
-                //     {`${day} `}
-                //     {changeDayIndex(firstDayIndex)}
-                //   </td>
-                // )
+              {firstRowValues.map(
+                (day) =>
+                  indexOfThisDay(day) === today.getDay() &&
+                  dayIndex + 1 === today.getDate() ? (
+                    <td
+                      key={day}
+                      className={`${styles.first_row} ${styles.today}`}
+                    >
+                      {`${day} `}
+                      {`${changeDayIndex(dayIndex)} `}
+                    </td>
+                  ) : (
+                    <td key={day} className={styles.first_row}>
+                      {`${day} `}
+                      {`${changeDayIndex(dayIndex)} `}
+                    </td>
+                  )
 
-                <td key={day} className={styles.first_row}>
-                  {`${day} ${changeDayIndex(firstDayIndex)}`}
-                </td>
-              ))}
+                // <td key={day} className={styles.first_row}>
+                //   {`${day} ${changeDayIndex(firstDayIndex)}`}
+                // </td>
+              )}
             </tr>
             {/* rest of schedule map */}
             {data.map((rows) => (
@@ -210,30 +212,29 @@ const Schedule = ({ info, today }) => {
                 <td className={styles.first_col}>
                   {hours[hoursCounter++] + ":00"}
                 </td>
-                {rows.map(
-                  (cols) =>
-                    cols.col === today.getDay() &&
-                    cols.date === today.getDate() &&
-                    cols.year === today.getFullYear() ? (
-                      <td key={Math.random()} className={styles.today}>
-                        <Link href="/other">
-                          <a className={styles.inner_text}>{`-${cols.id}-`}</a>
-                        </Link>
-                      </td>
-                    ) : (
-                      <td key={Math.random()}>
-                        <Link href="/other">
-                          <a className={styles.inner_text}>{cols.id}</a>
-                        </Link>
-                      </td>
-                    )
+                {rows.map((cols) => (
+                  // cols.col === today.getDay() &&
+                  // cols.date === today.getDate() &&
+                  // cols.year === today.getFullYear() ? (
+                  //   <td key={Math.random()} className={styles.today}>
+                  //     <Link href="/other">
+                  //       <a className={styles.inner_text}>{`-${cols.id}-`}</a>
+                  //     </Link>
+                  //   </td>
+                  // ) : (
+                  //   <td key={Math.random()}>
+                  //     <Link href="/other">
+                  //       <a className={styles.inner_text}>{cols.id}</a>
+                  //     </Link>
+                  //   </td>
+                  // )
 
-                  // <td key={Math.random()}>
-                  //   <Link href="/other">
-                  //     <a className={styles.inner_text}>{cols}</a>
-                  //   </Link>
-                  // </td>
-                )}
+                  <td key={Math.random()}>
+                    <Link href="/other">
+                      <a className={styles.inner_text}>{cols.id}</a>
+                    </Link>
+                  </td>
+                ))}
               </tr>
             ))}
           </thead>
