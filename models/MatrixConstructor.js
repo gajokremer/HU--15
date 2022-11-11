@@ -29,13 +29,14 @@ async function constructMatrix(rows, cols, req) {
   const verifyActivity = (activity) => {
     const { date, time, position } = activity;
     // proofs if the activity is in the specified week
-    // const isInWeek =
-    //   date.day >= weekStart.getDate() && date.day <= weekEnd.getDate();
 
-    const inTime = time.start === position.row + 7;
+    const inWeek =
+      date.day >= weekStart.getDate() && date.day <= weekEnd.getDate();
+    const inTime =
+      time.start <= position.row + 7 && time.end > position.row + 7;
     const inDay = dayOfWeek(date.day, date.month, date.year) === position.col;
 
-    return inTime && inDay;
+    return inWeek && inTime && inDay;
   };
 
   // determine if its monday, tuesday, etc given a day, month and year
