@@ -23,58 +23,84 @@ async function constructMatrix(rows, cols, req) {
   const activities = dbData.rows;
   console.log("activities: ", activities);
 
-  const evaluateActivity = (activity, x, y) => {
-    const activityDate = activity.date;
+  const verifyActivity = (activity) => {
+    // console.log(activity.startTime, activity.row + 7);
+    // const result =
+    //   activity.startTime <= activity.row + 7 &&
+    //   new Date(activity.date).getDay() === activity.col;
+    // console.log(result);
+
+    // return result;
+
+    return false;
   };
 
-  const makeActivity = (element) => {
+  const makeActivity = (element, i, j) => {
     const activity = {
       id: element.idactivity,
       name: element.activity_name,
       date: element.date_activity,
-      start: element.start_hour,
-      end: element.end_hour,
+      year: element.year,
+      startTime: +element.start_hour.split(":")[0],
+      endTime: +element.end_hour.split(":")[0],
+      duration:
+        +element.end_hour.split(":")[0] - +element.start_hour.split(":")[0],
       manager: element.manager,
-      row: 0,
-      col: 0,
+      row: i,
+      col: j,
     };
     return activity;
   };
 
-  // const matrix = [];
-  // for (let i = 0; i < rows; i++) {
-  //   matrix.push([]);
-  //   for (let j = 0; j < cols; j++) {
-  //     // const activity = makeActivity(activities[0]);
-  //     // matrix[i].push(activity);
-
-  //     let found = false;
-  //     let activity = null;
-  //     for (let k = 0; k < activities.length; k++) {
-  //       activity = makeActivity(activities[k]);
-  //     }
-  //     matrix[i].push(activity);
-  //   }
-  // }
-
+  // console.log("\nactivities: ", activities);
   // console.log("weekStart: ", weekStart);
   // console.log("weekEnd: ", weekEnd);
+
+  // const matrix = [];
+  // for (let i = 0; i < rows; i++) {
+  //   let date = new Date(weekStart);
+  //   matrix.push([]);
+  //   for (let j = 0; j < cols; j++) {
+  //     // const date = new Date();
+  //     const tableContent = {
+  //       id: "---",
+  //       row: i,
+  //       col: j,
+  //       date: date.getDate(),
+  //       year: date.getFullYear(),
+  //     };
+  //     matrix[i].push(tableContent);
+  //     date.setDate(date.getDate() + 1);
+  //   }
+  // }
 
   const matrix = [];
   for (let i = 0; i < rows; i++) {
     let date = new Date(weekStart);
     matrix.push([]);
     for (let j = 0; j < cols; j++) {
-      // const date = new Date();
-      const tableContent = {
-        id: "---",
-        row: i,
-        col: j,
-        date: date.getDate(),
-        year: date.getFullYear(),
-      };
-      matrix[i].push(tableContent);
-      date.setDate(date.getDate() + 1);
+      let found = false;
+      // console.log("\nNext cell");
+      for (let k = 0; k < activities.length && !found; k++) {
+        const newActivity = makeActivity(activities[k], i, j);
+        // console.log("newActivity: ", newActivity);
+        if (verifyActivity(newActivity)) {
+          matrix[i].push(newActivity);
+          found = true;
+        }
+      }
+
+      if (!found) {
+        const tableContent = {
+          id: "---",
+          row: i,
+          col: j,
+          date: date.getDate(),
+          year: date.getFullYear(),
+        };
+        matrix[i].push(tableContent);
+        date.setDate(date.getDate() + 1);
+      }
     }
   }
   return matrix;

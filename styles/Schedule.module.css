@@ -77,7 +77,7 @@
 .schedule td.first_row:hover,
 .schedule td.first_col:hover {
   /* background-color: var(--dark-hover); */
-  background-color: white;
+  background-color: whitesmoke;
 }
 
 .schedule td {
@@ -95,13 +95,16 @@
 }
 
 .today {
-  background-color: #f44949;
+  /* background-color: #f44949; */
   /* background-color: #fc6d65; */
   /* color: var(--dark-text); */
+  /* background-color: var(--dark-body); */
+  background-color: lightgray;
 }
 
 .schedule td.today:hover {
-  background-color: #ff8c82;
+  /* background-color: #ff8c82; */
+  background-color: var(--dark-hover);
 }
 
 .schedule td.first_row.today:hover {
