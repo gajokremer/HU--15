@@ -14,24 +14,19 @@ async function constructMatrix(rows, cols, req) {
   console.log("weekstart: ", weekStart);
   console.log("weekend: ", weekEnd);
 
-  const username = "Emily";
+  const manager = "Emily";
+
   const dbData = await db.query(
-    "SELECT * FROM ACTIVITY WHERE IDACTIVITY in (SELECT e.idActivity FROM PARTICIPANT e WHERE IDPARTICIPANT = $1) OR manager = $1;",
-    [username]
+    `SELECT * FROM ACTIVITY WHERE IDACTIVITY in
+    (SELECT e.idActivity FROM PARTICIPANT e WHERE IDPARTICIPANT = $1) OR manager = $1
+    AND DATE_ACTIVITY BETWEEN $2 AND $3;`,
+    [manager, weekStart, weekEnd]
   );
 
   const activities = dbData.rows;
   console.log("activities: ", activities);
 
   const verifyActivity = (activity) => {
-    // console.log(activity.startTime, activity.row + 7);
-    // const result =
-    //   activity.startTime <= activity.row + 7 &&
-    //   new Date(activity.date).getDay() === activity.col;
-    // console.log(result);
-
-    // return result;
-
     return false;
   };
 
@@ -40,7 +35,6 @@ async function constructMatrix(rows, cols, req) {
       id: element.idactivity,
       name: element.activity_name,
       date: element.date_activity,
-      year: element.year,
       startTime: +element.start_hour.split(":")[0],
       endTime: +element.end_hour.split(":")[0],
       duration:

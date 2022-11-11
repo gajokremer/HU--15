@@ -6,23 +6,23 @@ import styles from "../styles/Schedule.module.css";
 // del evento, y luego utilizar un map para ubicarlos en una matriz.
 // Finalmente, se pasa la matriz al front-end y se renderiza en la tabla.
 
-async function requestData(weekStart, weekEnd) {
-  //   let response = await fetch("ul", {
-  //     method: "POST",
-  //     headers: {
-  //       Accept: "application-json",
-  //       "Content-type": "application-json",
-  //     },
-  //     body: JSON.stringify(name),
-  //   });
+// async function requestData(weekStart, weekEnd) {
+//   //   let response = await fetch("ul", {
+//   //     method: "POST",
+//   //     headers: {
+//   //       Accept: "application-json",
+//   //       "Content-type": "application-json",
+//   //     },
+//   //     body: JSON.stringify(name),
+//   //   });
 
-  let response = await fetch("/api/hello", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ weekStart, weekEnd }),
-  });
-  return response.json();
-}
+//   let response = await fetch("/api/hello", {
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify({ weekStart, weekEnd }),
+//   });
+//   return response.json();
+// }
 
 const Schedule = ({ info, today }) => {
   // useEffect(() => {
