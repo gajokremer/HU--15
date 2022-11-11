@@ -8,9 +8,9 @@ async function constructMatrix(rows, cols, req) {
   //   [username]
   // );
 
-  // todo: Modify the query to get the data from the specified week
-
-  const { weekStart, weekEnd } = req;
+  let { weekStart, weekEnd } = req;
+  weekStart = new Date(weekStart);
+  weekEnd = new Date(weekEnd);
   console.log("weekstart: ", weekStart);
   console.log("weekend: ", weekEnd);
 
@@ -24,17 +24,30 @@ async function constructMatrix(rows, cols, req) {
   );
 
   const activities = dbData.rows;
-  console.log("activities: ", activities);
+  // console.log("activities: ", activities);
 
   const verifyActivity = (activity) => {
-    return false;
+    const { date, time, position } = activity;
+    // proofs if the activity is in the specified week
+    // const isInWeek =
+    //   date.day >= weekStart.getDate() && date.day <= weekEnd.getDate();
+
+    const inTime = time.start === position.row + 7;
+    const inDay = dayOfWeek(date.day, date.month, date.year) === position.col;
+
+    return inTime && inDay;
+  };
+
+  // determine if its monday, tuesday, etc given a day, month and year
+  const dayOfWeek = (day, month, year) => {
+    const date = new Date(year, month, day);
+    return date.getDay();
   };
 
   const makeActivity = (element, i, j) => {
     const activity = {
       id: element.idactivity,
       name: element.activity_name,
-      // date: element.date_activity,
       date: {
         day: element.date_activity.getDate(),
         month: element.date_activity.getMonth(),
@@ -83,7 +96,7 @@ async function constructMatrix(rows, cols, req) {
     matrix.push([]);
     for (let j = 0; j < cols; j++) {
       let found = false;
-      // console.log("\nNext cell");
+      console.log("\n");
       for (let k = 0; k < activities.length && !found; k++) {
         const newActivity = makeActivity(activities[k], i, j);
         // console.log("newActivity: ", newActivity);
@@ -96,14 +109,14 @@ async function constructMatrix(rows, cols, req) {
       if (!found) {
         const tableContent = {
           id: "---",
-          position: {
-            row: i,
-            col: j,
-          },
           date: {
             day: date.getDate(),
             month: date.getMonth(),
             year: date.getFullYear(),
+          },
+          position: {
+            row: i,
+            col: j,
           },
         };
         matrix[i].push(tableContent);
