@@ -6,6 +6,11 @@
   justify-content: center;
   text-align: center;
   padding: 0.5rem;
+
+  margin: 0.5rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  font-family: "Quicksand", sans-serif;
 }
 
 /* DAY SECTION */
@@ -41,6 +46,11 @@
   display: grid;
   margin: 0, 10px;
   cursor: pointer;
+  background-color: var(--dark-main);
+  /* color: white; */
+  color: var(--dark-text);
+  border: none;
+  font-size: 1.5rem;
 }
 
 .day_change:hover {
@@ -52,18 +62,24 @@
   /* border: 2px dashed blue; */
   /* align-content: center; */
   display: grid;
+  /* center */
+  justify-content: center;
 }
 
 .schedule {
   /* background-color: var(--dark-hover); */
   background-color: whitesmoke;
-  border: 1px solid var(--dark-text);
+  border: 2px solid var(--dark-text);
   border-radius: 0.5rem;
   width: 45rem;
   padding: 0.5rem;
   margin: 0.5rem;
-  display: grid;
+  /* display: grid; */
   grid-gap: 0.5rem;
+
+  border-collapse: collapse;
+  /* border-radius: 1rem; */
+  /* border: 2px solid white; */
 }
 
 .first_row,
