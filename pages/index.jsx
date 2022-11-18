@@ -1,7 +1,7 @@
 // import styles from "../styles/Home.module.css";
 import { useEffect, useState } from "react";
 import Header from "../components/Header";
-import ProfileBar from "../components/ProfileBar";
+import ReferenceBar from "../components/ReferenceBar";
 import Schedule from "../components/Schedule";
 
 export default function Home() {
@@ -30,7 +30,7 @@ export default function Home() {
   return (
     <div>
       <Header></Header>
-      <ProfileBar name={"Gabriel Kremer"} role={"Student"}></ProfileBar>
+      <ReferenceBar name={"Gabriel Kremer"} role={"Student"}></ReferenceBar>
       <Schedule info={data} today={new Date()}></Schedule>
     </div>
   );

@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React from "react";
-import styles from "../styles/ProfileBar.module.css";
+import styles from "../styles/ReferenceBar.module.css";
 
-const ProfileBar = ({ name, role }) => {
+const ReferenceBar = ({ name, role }) => {
   return (
     <>
       <div className={styles.information_section}>
@@ -68,4 +68,4 @@ const ProfileBar = ({ name, role }) => {
   );
 };
 
-export default ProfileBar;
+export default ReferenceBar;
