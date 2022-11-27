@@ -24,7 +24,7 @@ import styles from "../styles/Schedule.module.css";
 //   return response.json();
 // }
 
-const Schedule = ({ info, today, username }) => {
+const Schedule = ({ today, username }) => {
   // useEffect(() => {
   console.log("======Schedule loaded======");
   // });
