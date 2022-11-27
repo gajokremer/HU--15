@@ -64,6 +64,7 @@
   display: grid;
   /* center */
   justify-content: center;
+  font-family: "Quicksand", sans-serif;
 }
 
 .schedule {
@@ -119,6 +120,10 @@
   /* color: var(--dark-text); */
   /* background-color: var(--dark-body); */
   background-color: lightgray;
+}
+
+.event {
+  background-color: #FF7377;
 }
 
 .schedule td.today:hover {

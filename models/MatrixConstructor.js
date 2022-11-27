@@ -8,23 +8,27 @@ async function constructMatrix(rows, cols, req) {
   //   [username]
   // );
 
-  let { weekStart, weekEnd } = req;
+  let { weekStart, weekEnd, username } = req;
   weekStart = new Date(weekStart);
   weekEnd = new Date(weekEnd);
   console.log("weekstart: ", weekStart);
   console.log("weekend: ", weekEnd);
 
+  const user = await db.query(`SELECT * FROM USERS WHERE username = $1`, [
+    username,
+  ]);
+  console.log("user: ", user.rows[0]);
+
   const manager = "Emily";
 
-  const dbData = await db.query(
-    `SELECT * FROM ACTIVITY WHERE IDACTIVITY in
-    (SELECT e.idActivity FROM PARTICIPANT e WHERE IDPARTICIPANT = $1) OR manager = $1
-    AND DATE_ACTIVITY BETWEEN $2 AND $3;`,
-    [manager, weekStart, weekEnd]
+  const dbActivities = await db.query(
+    `SELECT * FROM activity WHERE idactivity IN
+    (SELECT e.idactivity FROM participant e WHERE idparticipant = $1);`,
+    [username]
   );
 
-  const activities = dbData.rows;
-  // console.log("activities: ", activities);
+  const activities = dbActivities.rows;
+  console.log("activities: ", activities);
 
   const verifyActivity = (activity) => {
     const { date, time, position } = activity;
@@ -97,7 +101,7 @@ async function constructMatrix(rows, cols, req) {
     matrix.push([]);
     for (let j = 0; j < cols; j++) {
       let found = false;
-      console.log("\n");
+      // console.log("\n");
       for (let k = 0; k < activities.length && !found; k++) {
         const newActivity = makeActivity(activities[k], i, j);
         // console.log("newActivity: ", newActivity);

@@ -26,12 +26,13 @@ export default function Home() {
   // if (!data) return <p>No table data</p>;
 
   const data = null;
+  const username = "JuanK";
 
   return (
     <div>
       <Header></Header>
       <ReferenceBar name={"Gabriel Kremer"} role={"Student"}></ReferenceBar>
-      <Schedule info={data} today={new Date()}></Schedule>
+      <Schedule info={data} today={new Date()} username={username}></Schedule>
     </div>
   );
 }

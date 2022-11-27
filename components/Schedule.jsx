@@ -24,7 +24,7 @@ import styles from "../styles/Schedule.module.css";
 //   return response.json();
 // }
 
-const Schedule = ({ info, today }) => {
+const Schedule = ({ info, today, username }) => {
   // useEffect(() => {
   console.log("======Schedule loaded======");
   // });
@@ -129,14 +129,14 @@ const Schedule = ({ info, today }) => {
     fetch("/api/hello", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ weekStart, weekEnd }),
+      body: JSON.stringify({ weekStart, weekEnd, username }),
     })
       .then((res) => res.json())
       .then((data) => {
         setData(data);
         setLoading(false);
       });
-  }, [weekStart, weekEnd]);
+  }, [weekStart, weekEnd, username]);
 
   // if (isLoading) return <p className={styles.warning}>Loading...</p>;
   if (!data) return <p className={styles.warning}>No table data</p>;
@@ -153,12 +153,7 @@ const Schedule = ({ info, today }) => {
             <button className={styles.day_change} onClick={() => getPrevWeek()}>
               &lt;
             </button>
-            <>
-              {/* <span className={styles.day_change} id={styles.prev_day}>
-                <pre onClick={() => getPreviousWeek()}>&lt;</pre>
-                </span>
-              <span className={styles.week}>Week {week}</span> */}
-            </>
+            <></>
             <span className={styles.week}>
               {weekStart.toLocaleDateString()}
               {" - "}
@@ -167,12 +162,7 @@ const Schedule = ({ info, today }) => {
             <button className={styles.day_change} onClick={() => getNextWeek()}>
               &gt;
             </button>
-            <>
-              {/* <span className={styles.day_change} id={styles.next_day}>
-                <pre onClick={() => getNextWeek()}>&gt;</pre>
-                <pre onClick={() => nextWeek()}>&gt;</pre>
-              </span> */}
-            </>
+            <></>
           </div>
         </div>
       </div>
@@ -184,22 +174,6 @@ const Schedule = ({ info, today }) => {
               {/* first row map */}
               <td className={styles.first_row}>{"Hours"}</td>
               {firstRowValues.map((day) => (
-                // indexOfThisDay(day) === today.getDay() &&
-                // dayIndex + 1 === today.getDate() ? (
-                //   <td
-                //     key={day}
-                //     className={`${styles.first_row} ${styles.today}`}
-                //   >
-                //     {`${day} `}
-                //     {`${changeDayIndex(dayIndex)} `}
-                //   </td>
-                // ) : (
-                //   <td key={day} className={styles.first_row}>
-                //     {`${day} `}
-                //     {`${changeDayIndex(dayIndex)} `}
-                //   </td>
-                // )
-
                 <td key={day} className={styles.first_row}>
                   {`${day} ${changeDayIndex(dayIndex)}`}
                 </td>
@@ -217,22 +191,36 @@ const Schedule = ({ info, today }) => {
                     cols.date.day === today.getDate() &&
                     cols.date.month === today.getMonth() &&
                     cols.date.year === today.getFullYear() ? (
-                      <td key={Math.random()} className={styles.today}>
+                      //check if cols.id is different from "---"
+                      cols.id === "---" ? (
+                        <td key={Math.random()} className={styles.today}>
+                          <Link href="/other">
+                            <a className={styles.inner_text}>{`${cols.id}`}</a>
+                          </Link>
+                        </td>
+                      ) : (
+                        <td key={Math.random()} className={styles.event}>
+                          <Link href="/other">
+                            <a className={styles.inner_text}>{`${cols.id}`}</a>
+                          </Link>
+                        </td>
+                      )
+                    ) : cols.id === "---" ? (
+                      <td key={Math.random()}>
                         <Link href="/other">
                           <a className={styles.inner_text}>{`${cols.id}`}</a>
                         </Link>
                       </td>
                     ) : (
-                      <td key={Math.random()}>
+                      <td key={Math.random()} className={styles.event}>
                         <Link href="/other">
-                          <a className={styles.inner_text}>{cols.id}</a>
+                          <a className={styles.inner_text}>{`${cols.id}`}</a>
                         </Link>
                       </td>
                     )
-
                   // <td key={Math.random()}>
                   //   <Link href="/other">
-                  //     <a className={styles.inner_text}>{cols.id}</a>
+                  //     <a className={styles.inner_text}>{`${cols.id}`}</a>
                   //   </Link>
                   // </td>
                 )}

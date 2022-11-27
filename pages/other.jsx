@@ -1,11 +1,11 @@
 import Link from "next/link";
 import React from "react";
-import ProfileBar from "../components/ProfileBar";
+import ReferenceBar from "../components/ReferenceBar";
 
 export default function other() {
   return (
     <div>
-      <ProfileBar></ProfileBar>
+      <ReferenceBar></ReferenceBar>
       <h1>Other</h1>
       <Link href={"/"}>
         <a>Back</a>
