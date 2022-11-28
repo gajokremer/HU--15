@@ -23,8 +23,9 @@ async function constructMatrix(rows, cols, req) {
 
   const dbActivities = await db.query(
     `SELECT * FROM activity WHERE idactivity IN
-    (SELECT e.idactivity FROM participant e WHERE idparticipant = $1);`,
-    [username]
+      (SELECT e.idactivity FROM participant e WHERE idparticipant = $1)
+      AND date_activity BETWEEN $2 AND $3;`,
+    [username, weekStart, weekEnd]
   );
 
   const activities = dbActivities.rows;
